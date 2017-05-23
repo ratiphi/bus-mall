@@ -1,24 +1,19 @@
 'use strict';
 
+// Declare variables
 var clickCounter = 0;
+var productArray = [];
 
+// Constructor function, includes product name, file path, shown counter, clicked counter, and method to push created products to product array
 function ImageCreator(name, path) {
   this.name = name;
   this.path = path;
   this.shown = 0;
   this.clicked = 0;
+  productArray.push(this);
 }
 
-
-//
-// imgArray[1].path
-
-// function createObjects() {
-  // var imgArray = ['img/bag.jpg', 'img/banana.jpg', 'img/bathroom.jpg', 'img/boots.jpg', 'img/breakfast.jpg', 'img/bubblegum.jpg', 'img/chair.jpg', 'img/cthulhu.jpg', 'img/dogduck.jpg', 'img/dragon.jpg', 'img/pen.jpg', 'img/petsweep.jpg', 'img/scissors.jpg', 'img/shark.jpg', 'img/sweep.png', 'img/tauntaun.jpg', 'img/unicorn.jpg', 'img/usb.gif', 'img/watercan.jpg', 'img/wineglass.jpg'];
-  //
-  // for (i = 0; i < imgArray.length; i++) {
-  //   var 'image' + i = new ImageCreator(imgArray[i].split('/')[1].split('.')[0], imgArray[i]);
-  // }
+// Use Constructor function to build the objects, adding each one to the product array
 var bag = new ImageCreator('bag', './img/bag.jpg');
 var banana = new ImageCreator('banana', './img/banana.jpg');
 var bathroom = new ImageCreator('bathroom', './img/bathroom.jpg');
@@ -40,41 +35,43 @@ var unicorn = new ImageCreator('unicorn', './img/unicorn.jpg');
 var watercan = new ImageCreator('watercan', './img/watercan.jpg');
 var wineglass = new ImageCreator('wineglass', './img/wineglass.jpg');
 
-var imagesArray = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogduck, dragon, pen, petsweep, scissors, shark, sweep, tauntaun, unicorn, usb, watercan, wineglass];
-
-//var imagesTracked = [];
-function randomIndexGen() {
-  var randIndex = Math.floor(Math.random() * imagesArray.length);
-  var image = imagesArray[randIndex];
-  return image;
+// function to generate a random product and return it by index ID
+function randomProductGen() {
+  var randIndex = Math.floor(Math.random() * productArray.length);
+  return productArray[randIndex];
 }
+console.log(randomProductGen());
 
+// function to display 3 images to the DOM, looping through until the 2nd and 3rd images are not the same as the others
 function displayImages() {
-  var imagePath = randomIndexGen().path;
-  console.log(imagePath);
-  var imageOne = document.getElementById('image1');
-  console.log(imageOne);
-  var elImage = document.createElement('img');
-  //elImage.value = ('src', imagePath);
-  elImage.setAttribute('src', imagePath);
-  console.log(elImage);
-  imageOne.innerHTML = elImage;
-  //console.log(imageOne);
+  var elImageOne = document.getElementById('image1');
+  console.log(elImageOne);
+  var randImageOne = randomProductGen();
+  console.log(randImageOne);
+
+  elImageOne.setAttribute('src', randImageOne.path);
+
+  var elImageTwo = document.getElementById('image2');
+  console.log(elImageTwo);
+  var randImageTwo = randomProductGen();
+  console.log(randImageTwo);
+
+  while (randImageOne === randImageTwo) {
+    randImageTwo = randomProductGen();
+  }
+
+  elImageTwo.setAttribute('src', randImageTwo.path);
+
+  var elImageThree = document.getElementById('image3');
+  console.log(elImageThree);
+  var randImageThree = randomProductGen();
+  console.log(randImageThree);
+
+  while (randImageThree === randImageOne || randImageThree === randImageTwo) {
+    randImageThree = randomProductGen();
+  }
+
+  elImageThree.setAttribute('src', randImageThree.path);
 }
 
 displayImages();
-
-
-    // while (imagesTracked.indexOf(randIndex) {
-      //while random image is not inside of images track
-      //randomimage ++      var randIndex = Math.floor(Math.random() * imagesArray.length);
-
-// imagesTracked.push(randPicture);
-// function displayImages() {
-//   var imageOne = document.getElementById('image1');
-//   var imageTwo = document.getElementById('image2');
-//   var imageThree = document.getElementById('image3');
-
-
-//
-// }
