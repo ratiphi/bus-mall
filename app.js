@@ -3,6 +3,7 @@
 // Declare variables
 var clickCounter = 0;
 var productArray = [];
+var justShown = [];
 
 // Constructor function, includes product name, file path, shown counter, clicked counter, and method to push created products to product array
 function ImageCreator(name, path) {
@@ -40,21 +41,25 @@ function randomProductGen() {
   var randIndex = Math.floor(Math.random() * productArray.length);
   return productArray[randIndex];
 }
-console.log(randomProductGen());
+//console.log(randomProductGen());
 
 // function to display 3 images to the DOM, looping through until the 2nd and 3rd images are not the same as the others
+var elImageOne = document.getElementById('image1');
+var elImageTwo = document.getElementById('image2');
+var elImageThree = document.getElementById('image3');
+var randImageOne, randImageTwo, randImageThree;
+
 function displayImages() {
-  var elImageOne = document.getElementById('image1');
-  console.log(elImageOne);
-  var randImageOne = randomProductGen();
-  console.log(randImageOne);
+  //console.log(elImageOne);
+  randImageOne = randomProductGen();
+  //console.log(randImageOne);
 
   elImageOne.setAttribute('src', randImageOne.path);
 
-  var elImageTwo = document.getElementById('image2');
-  console.log(elImageTwo);
-  var randImageTwo = randomProductGen();
-  console.log(randImageTwo);
+
+  //console.log(elImageTwo);
+  randImageTwo = randomProductGen();
+  //console.log(randImageTwo);
 
   while (randImageOne === randImageTwo) {
     randImageTwo = randomProductGen();
@@ -62,10 +67,10 @@ function displayImages() {
 
   elImageTwo.setAttribute('src', randImageTwo.path);
 
-  var elImageThree = document.getElementById('image3');
-  console.log(elImageThree);
-  var randImageThree = randomProductGen();
-  console.log(randImageThree);
+
+  //console.log(elImageThree);
+  randImageThree = randomProductGen();
+  //console.log(randImageThree);
 
   while (randImageThree === randImageOne || randImageThree === randImageTwo) {
     randImageThree = randomProductGen();
@@ -75,3 +80,32 @@ function displayImages() {
 }
 
 displayImages();
+
+// listens for a click on an image
+elImageOne.addEventListener('click', function() {
+  randImageOne.clicked += 1;
+  clickCounter += 1;
+  console.log('click counter: ' + clickCounter);
+  displayImages();
+});
+
+elImageTwo.addEventListener('click', function() {
+  randImageTwo.clicked += 1;
+  clickCounter += 1;
+  console.log('click counter: ' + clickCounter);
+  displayImages();
+});
+
+elImageThree.addEventListener('click', function() {
+  randImageThree.clicked += 1;
+  clickCounter += 1;
+  console.log('click counter: ' + clickCounter);
+  displayImages();
+});
+
+
+  // console.log(bag.clicked);
+  // console.log(banana.clicked);
+  // console.log(bathroom.clicked);
+  // console.log(boots.clicked);
+  // console.log(breakfast.clicked);
