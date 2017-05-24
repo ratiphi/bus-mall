@@ -2,6 +2,9 @@
 body div ul li {
   display: inline-block;
 }
+.three-images {
+  margin: 0 auto;
+}
 
 img {
   width: 400px;
@@ -16,4 +19,10 @@ body h1 {
 body h2 {
   font-size: 20px;
   margin: 15px 0px 15px 30px;
+}
+
+.chart-section {
+  width: 500px;
+  height: 400px;
+  margin: 0 auto;
 }

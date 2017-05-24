@@ -137,13 +137,36 @@ elImageThree.addEventListener('click', function() {
 });
 
 
+//  builds a chart with a placeholder dataset until I get my bus mall functionality working.
+
+var canvas = document.getElementById('chart');
+var ctx = canvas.getContext('2d');
+
+function placeholderDataArray() {
+  return [5, 3, 7, 4, 6, 1, 3, 2, 4, 3, 6, 8, 2, 4, 3, 5, 7, 2, 7, 5];
+}
+
+var chart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'chair', 'bubblegum', 'cthulhu', 'dogduck', 'dragon', 'pen', 'petsweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'usb', 'unicorn', 'watercan', 'wineglass'],
+    datasets: [{
+      label: 'Number of Clicks Per Images',
+      data: placeholderDataArray(),
+      backgroundColor: ['#00B2E5', '#00D4E3', '#00E1CB', '#00DFA6', '#00DD82', '#00DB5E', '#00D93B', '#00D719', '#08D500', '#2AD300', '#4AD100', '#6ACF00', '#8ACD00', '#A8CB00', '#C6C900', '#C7A900', '#C58800', '#C36800', '#C14800', '#BF2900']
+    }]
+  },
+  options: {}
+});
+
+
 //
 // console.log(bag.clicked);
 // console.log(banana.clicked);
 // console.log(bathroom.clicked);
 // console.log(boots.clicked);
 // console.log(breakfast.clicked);
-// 
+//
 //
 // function Dog(name, breed) {
 //   this.name = name;
