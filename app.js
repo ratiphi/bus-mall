@@ -143,3 +143,21 @@ elImageThree.addEventListener('click', function() {
 // console.log(bathroom.clicked);
 // console.log(boots.clicked);
 // console.log(breakfast.clicked);
+// 
+//
+// function Dog(name, breed) {
+//   this.name = name;
+//   this.breed = breed;
+//   this.legs = 4;
+//   this.isAGoodDog = true;
+// }
+//
+// Dog.prototype.says = function(bark) {
+//   console.log(bark);
+// };
+//
+// var parker = new Dog('Parker', 'English Shepherd');
+// var demi = new Dog('Demi', 'Border Collie');
+//
+// parker.says('woof');
+// demi.legs = 3;
