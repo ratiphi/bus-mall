@@ -67,10 +67,10 @@ function displayImages() {
   var threeImages = document.getElementsByClassName('rand-image');
   var justUsed = [];
   for (var i = 0; i < 3; i++) {
-    var image = randomProductGen();
-    image.views += 1;
-    threeImages[i].setAttribute('src', image.path);
-    justUsed.push(image);
+    var varImage = randomProductGen();
+    varImage.views += 1;
+    threeImages[i].setAttribute('src', varImage.path);
+    justUsed.push(varImage);
   }
   shownImages = justUsed;
 }
@@ -168,8 +168,21 @@ var chart = new Chart(ctx, {
       backgroundColor: ['#00B2E5', '#00D4E3', '#00E1CB', '#00DFA6', '#00DD82', '#00DB5E', '#00D93B', '#00D719', '#08D500', '#2AD300', '#4AD100', '#6ACF00', '#8ACD00', '#A8CB00', '#C6C900', '#C7A900', '#C58800', '#C36800', '#C14800', '#BF2900']
     }]
   },
-  options: {}
+  options: {
+    scales: {
+      yAxes: [{
+        ticks: {
+          max:10,
+          beginAtZero:true
+        }
+      }]
+    }
+  }
 });
+
+// if (user.hasFinishedChart = true) {
+//
+// }
 
 
 //
