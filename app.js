@@ -81,7 +81,7 @@ var randImageOne, randImageTwo, randImageThree;
 
 function displayImages() {
   randImageOne = randomProductGen();
-  while (randImageOne[1] === justShown[0] || randImageOne[1] === justShown[1] || randImageOne[1] === justShown[2]) {
+  while (justShown.includes(randImageOne[1])) {
     console.log(randImageOne[1]);
     randImageOne = randomProductGen();
   }
@@ -89,7 +89,7 @@ function displayImages() {
   justShown.replace(0,randImageOne[1]);
 
   randImageTwo = randomProductGen();
-  while (randImageTwo[1] === randImageOne[1] || randImageTwo[1] === justShown[0] || randImageTwo[1] === justShown[1] || randImageTwo[1] === justShown[2]) {
+  while (randImageTwo[1] === randImageOne[1] || justShown.includes(randImageTwo[1])) {
     console.log(randImageTwo[1]);
     randImageTwo = randomProductGen();
   }
@@ -97,7 +97,7 @@ function displayImages() {
   justShown.replace(1,randImageTwo[1]);
 
   randImageThree = randomProductGen();
-  while (randImageThree[1] === randImageOne[1] || randImageThree[1] === randImageTwo[1] || randImageThree[1] === justShown[0] || randImageThree[1] === justShown[1] || randImageThree[1] === justShown[2]) {
+  while (randImageThree[1] === randImageOne[1] || randImageThree[1] === randImageTwo[1] || justShown.includes(randImageThree[1])) {
     console.log(randImageThree[1]);
     randImageThree = randomProductGen();
   }
