@@ -1,13 +1,14 @@
 'use strict';
 
 // Declare variables
-var clickCounter = 0;
+var totalClickCounter = 0;
 var productArray = [];
-var justShown = [];
+// var justShown = [];
+var shownImages = [];
 
-Array.prototype.replace = function ( index, item ) {
-  this.splice( index, 1, item );
-};
+// Array.prototype.replace = function ( index, item ) {
+//   this.splice( index, 1, item );
+// };
 
 // var arr = [ 'A', 'B', 'D'];
 // arr.replace(2, 'C');
@@ -17,8 +18,8 @@ Array.prototype.replace = function ( index, item ) {
 function ImageCreator(name, path) {
   this.name = name;
   this.path = path;
-  this.shown = 0;
-  this.clicked = 0;
+  this.clicks = 0;
+  this.views = 0;
   productArray.push(this);
 }
 
@@ -46,95 +47,106 @@ var wineglass = new ImageCreator('wineglass', './img/wineglass.jpg');
 
 // function to generate a random product and return it by index ID
 function randomProductGen() {
-  var randIndex = Math.floor(Math.random() * productArray.length);
-  //return [productArray[randIndex],randIndex];
-  return [productArray[randIndex], randIndex];
+  while (true) {
+    var randIndex = Math.floor(Math.random() * productArray.length);
+    if (shownImages.includes(productArray[randIndex]) === false) {
+      return productArray[randIndex];
+    }
+  }
+  // return [productArray[randIndex],randIndex];
 }
 
 // someArray.replace(2, 'C');
 // function to display 3 images to the DOM, looping through until the 2nd and 3rd images are not the same as the others
-var elImageOne = document.getElementById('image1');
-var elImageTwo = document.getElementById('image2');
-var elImageThree = document.getElementById('image3');
-var randImageOne, randImageTwo, randImageThree;
 
-// function displayImages() {
-//   randImageOne = randomProductGen();
-//   elImageOne.setAttribute('src', randImageOne.path);
-//   justShown.replace(0,randImageOne);
-//
-//   randImageTwo = randomProductGen();
-//   while (randImageOne === randImageTwo) {
-//     randImageTwo = randomProductGen();
-//   }
-//   elImageTwo.setAttribute('src', randImageTwo.path);
-//   justShown.replace(1,randImageTwo);
-//
-//   randImageThree = randomProductGen();
-//   while (randImageThree === randImageOne || randImageThree === randImageTwo) {
-//     randImageThree = randomProductGen();
-//   }
-//   elImageThree.setAttribute('src', randImageThree.path);
-//   justShown.replace(2,randImageThree);
-//   console.log(justShown);
-// }
+
+
+
 
 function displayImages() {
-  randImageOne = randomProductGen();
-  while (justShown.includes(randImageOne[1])) {
-    console.log(randImageOne[1]);
-    randImageOne = randomProductGen();
+  var threeImages = document.getElementsByClassName('rand-image');
+  var justUsed = [];
+  for (var i = 0; i < 3; i++) {
+    var image = randomProductGen();
+    image.views += 1;
+    threeImages[i].setAttribute('src', image.path);
+    justUsed.push(image);
   }
-  elImageOne.setAttribute('src', randImageOne[0].path);
-  justShown.replace(0,randImageOne[1]);
-
-  randImageTwo = randomProductGen();
-  while (randImageTwo[1] === randImageOne[1] || justShown.includes(randImageTwo[1])) {
-    console.log(randImageTwo[1]);
-    randImageTwo = randomProductGen();
-  }
-  elImageTwo.setAttribute('src', randImageTwo[0].path);
-  justShown.replace(1,randImageTwo[1]);
-
-  randImageThree = randomProductGen();
-  while (randImageThree[1] === randImageOne[1] || randImageThree[1] === randImageTwo[1] || justShown.includes(randImageThree[1])) {
-    console.log(randImageThree[1]);
-    randImageThree = randomProductGen();
-  }
-  elImageThree.setAttribute('src', randImageThree[0].path);
-  justShown.replace(2,randImageThree[1]);
-
-  console.log('just shown0: ' + justShown[0]);
-  console.log('just shown1: ' + justShown[1]);
-  console.log('just shown2: ' + justShown[2]);
-
+  shownImages = justUsed;
 }
 
+  // randImageOne = randomProductGen();
+  // while (justShown.includes(randImageOne[1])) {
+  //   console.log(randImageOne[1]);
+  //   randImageOne = randomProductGen();
+  // }
+  // elImageOne.setAttribute('src', randImageOne[0].path);
+  // justShown.replace(0,randImageOne[1]);
+  //
+  // randImageTwo = randomProductGen();
+  // while (randImageTwo[1] === randImageOne[1] || justShown.includes(randImageTwo[1])) {
+  //   console.log(randImageTwo[1]);
+  //   randImageTwo = randomProductGen();
+  // }
+  // elImageTwo.setAttribute('src', randImageTwo[0].path);
+  // justShown.replace(1,randImageTwo[1]);
+  //
+  // randImageThree = randomProductGen();
+  // while (randImageThree[1] === randImageOne[1] || randImageThree[1] === randImageTwo[1] || justShown.includes(randImageThree[1])) {
+  //   console.log(randImageThree[1]);
+  //   randImageThree = randomProductGen();
+  // }
+  // elImageThree.setAttribute('src', randImageThree[0].path);
+  // justShown.replace(2,randImageThree[1]);
+  //
+  // console.log('just shown0: ' + justShown[0]);
+  // console.log('just shown1: ' + justShown[1]);
+  // console.log('just shown2: ' + justShown[2]);
+
+function onClick () {
+  for (var i = 0; i < 3; i++) {
+    if (this.getAttribute('src') === shownImages[i].path) {
+      shownImages[i].clicks += 1;
+      console.log('item clicks: ', shownImages[i].clicks);
+      console.log('total clicks: ', totalClickCounter);
+      totalClickCounter += 1;
+      displayImages();
+    }
+  }
+}
+
+function eventHandler() {
+  var threeImages = document.getElementsByClassName('rand-image');
+  for (var i = 0; i < 3; i++) {
+    threeImages[i].addEventListener('click', onClick);
+  }
+}
+
+
 displayImages();
-
-
+eventHandler();
 
 // listens for a click on an image
-elImageOne.addEventListener('click', function() {
-  randImageOne[0].clicked += 1;
-  clickCounter += 1;
-  console.log('click counter: ' + clickCounter);
-  displayImages();
-});
-
-elImageTwo.addEventListener('click', function() {
-  randImageTwo[0].clicked += 1;
-  clickCounter += 1;
-  console.log('click counter: ' + clickCounter);
-  displayImages();
-});
-
-elImageThree.addEventListener('click', function() {
-  randImageThree[0].clicked += 1;
-  clickCounter += 1;
-  console.log('click counter: ' + clickCounter);
-  displayImages();
-});
+// elImageOne.addEventListener('click', function() {
+//   randImageOne[0].clicked += 1;
+//   clickCounter += 1;
+//   console.log('click counter: ' + clickCounter);
+//   displayImages();
+// });
+//
+// elImageTwo.addEventListener('click', function() {
+//   randImageTwo[0].clicked += 1;
+//   clickCounter += 1;
+//   console.log('click counter: ' + clickCounter);
+//   displayImages();
+// });
+//
+// elImageThree.addEventListener('click', function() {
+//   randImageThree[0].clicked += 1;
+//   clickCounter += 1;
+//   console.log('click counter: ' + clickCounter);
+//   displayImages();
+// });
 
 
 //  builds a chart with a placeholder dataset until I get my bus mall functionality working.
