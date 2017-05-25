@@ -5,6 +5,7 @@ var totalClickCounter = 0;
 var productArray = [];
 var shownImages = [];
 
+// load localStorage clicksArray into memory if it exists.
 if (localStorage.clicksArray) {
   var clicksArray = localStorage.clicksArray.split(',');
 } else {
@@ -76,7 +77,7 @@ function randomProductGen() {
 
 // function to generate 3 images and check if they were just used
 function displayImages() {
-  var threeImages = document.getElementsByClassName('randImage');
+  var threeImages = document.getElementsByClassName('rand-image');
   var justUsed = [];
   for (var i = 0; i < 3; i++) {
     var varImage = randomProductGen();
@@ -88,7 +89,7 @@ function displayImages() {
 }
 
 // function displayImages() {
-//   var threeImages = document.getElementsByClassName('randImage');
+//   var threeImages = document.getElementsByClassName('rand-image');
 //   var justUsed = [];
 //   for (var i = 0; i < 3; i++) {
 //     var varImage = randomProductGen();
@@ -115,7 +116,7 @@ function onClick () {
 
 function end() {
   if (totalClickCounter >= 25) {
-    var allPics = document.getElementsByClassName('randImage');
+    var allPics = document.getElementsByClassName('rand-image');
     for (var i = 0; i < allPics.length; i++) {
       allPics[i].removeEventListener('click', onClick);
     }
@@ -124,7 +125,7 @@ function end() {
 }
 // function to
 function eventHandler() {
-  var threeImages = document.getElementsByClassName('randImage');
+  var threeImages = document.getElementsByClassName('rand-image');
   for (var i = 0; i < 3; i++) {
     threeImages[i].addEventListener('click', onClick);
   }
@@ -136,6 +137,15 @@ function buildClicksArray() {
     clicksArray.push(productArray[i].clicks);
   }
   localStorage.clicksArray = clicksArray;
+
+  // var arrA = [1, 2, 3, 4, 5];
+  // var arrB = [5, 4, 3, 2, 1];
+  //
+  // for (var i = 0; i < 5; i++) {
+  // 	arrA[i] = arrA[i] + arrB[i];
+  // }
+  // alert(arrA);
+
   //return clicksArray;
 }
 
