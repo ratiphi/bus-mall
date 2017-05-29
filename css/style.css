@@ -6,13 +6,33 @@ body {
 body div ul li {
   display: inline-block;
 }
-.randImage {
-  margin: 8px 8px 8px 8px;
+.rand-image {
+
 }
 
-img {
-  width: 300px;
-  height: 300px;
+.rand-image {
+  margin: 8px 8px 8px 8px;
+  transition-property: background-color, color;
+  transition-duration: 350ms;
+  transition-timing-function: ease-out;
+  background-color: grey;
+  width: 290px;
+  height: 290px;
+  color: white;
+  border-color: black;
+  box-shadow: 2px 2px 1px black;
+  padding: 2px 4px;
+  border: solid 1px black;
+}
+
+.rand-image:hover {
+  cursor: pointer;
+  transition-property: background-color, color;
+  transition-duration: 350ms;
+  transition-timing-function: ease-out;
+  background-color:blue;
+  color:black;
+  box-shadow: 2px 2px 1px black;
 }
 
 body h1 {
